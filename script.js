@@ -2,66 +2,61 @@ const container = document.querySelector(".childContainer");
 const data = [
   {
     question:"Who is the president of united state",
-    option1: "Braack Obama",
-    option2:"Donald Trump",
-    option3:"Bill Clinton",
-    option4:"Joe Biden",
-    correct:"Joe Biden"
+    a: "Braack Obama",
+    b:"Donald Trump",
+    c:"Bill Clinton",
+    d:"Joe Biden",
+    correct:"d"
   },
   {
     question:"Who is the prime minister of india",
-    option1: "Narendra Modi",
-    option2:"Donald Trump",
-    option3:"Bill Clinton",
-    option4:"Joe Biden",
-    correct:"Narendra Modi"
-  }
+    a: "Narendra Modi",
+    b:"Donald Trump",
+    c:"Bill Clinton",
+    d:"Joe Biden",
+    correct:"a"
+  },
+  {
+    question:"Who is the president of india",
+    a: "Narendra Modi",
+    b:"Dropadi murmu",
+    c:"Bill Clinton",
+    d:"Joe Biden",
+    correct:"b"
+  },
 ];
 
-let contentCount = 0;
-
-function htmlInsert(){
-  const html1 = `
-    <div class="content">
-    <h2 class="question">${data[contentCount].question}</h2>
-
-    <ul class="answersList">
-        <li>
-            <input type="radio" id="option1" data-option="1" name="option">
-            <label for="option1">${data[contentCount].option1}</label>
-        </li>
-        <li>
-            <input type="radio" id="option2" data-option="2" name="option">
-            <label for="option2">${data[contentCount].option2}</label>
-        </li>
-        <li>
-            <input type="radio" id="option3" data-option="3" name="option">
-            <label for="option3">${data[contentCount].option3}</label>
-        </li>
-        <li>
-            <input type="radio" id="option4" data-option="4" name="option">
-            <label for="option4">${data[contentCount].option4}</label>
-        </li>
-    </ul>
-    </div>
-    <div>
-      <button class="submitBtn">Submit</button>
-    </div>
-`
-container.innerHTML = html1;
-};
-
-htmlInsert();
-
+const question = document.querySelector(".question");
+const optionA = document.querySelector("#a_option");
+const optionB = document.querySelector("#b_option");
+const optionC = document.querySelector("#c_option");
+const optionD = document.querySelector("#d_option");
 const submitBtn = document.querySelector(".submitBtn");
+
+
+let questionCount = 0;
+updateQuestions();
+function updateQuestions(){
+    question.innerText = data[questionCount].question;
+    optionA.innerText = data[questionCount].a;
+    optionB.innerText = data[questionCount].b;
+    optionC.innerText = data[questionCount].c;
+    optionD.innerText = data[questionCount].d;
+}
+
+function reload(){
+  submitBtn.innerText="Reload";
+  window.location.reload();
+}
 submitBtn.addEventListener("click",()=>{
-  if(contentCount>data.length){
-    contentCount=0;
-    htmlInsert();
+  if(questionCount<data.length-1){
+    questionCount++;
+    updateQuestions();
+    console.log(questionCount);
   }
   else{
-    contentCount++;
-    htmlInsert();
+    questionCount=0;
+    console.log(questionCount);
+    updateQuestions();
   }
-  console.log(contentCount)
 })
